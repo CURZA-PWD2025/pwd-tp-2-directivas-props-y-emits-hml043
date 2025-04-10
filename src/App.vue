@@ -8,7 +8,16 @@
 
   const handleButtonClickAddLike = (msg) => {
     //message.value = msg[0];
-    pelisVotadas.value.push(msg[0]) //message.value
+    //console.log(msg[1])
+    if (msg[1]) {   //voto positivo
+      pelisVotadas.value.push(msg[0]) //message.value
+    }
+    else {
+      const index: number = pelisVotadas.value.findIndex(a => a === msg[0]);
+      if (index != -1) {
+        pelisVotadas.value.splice(index, 1);
+      }
+    }
     //console.log(message.value)
     //console.log(pelisVotadas)
   };

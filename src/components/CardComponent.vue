@@ -59,8 +59,8 @@
 
       <div class="peli-card__likes">
         <span>&#x1F44D;</span>{{ countLikes }}        
-        <button :class="{ disabled: !enableAddLike }" @click="clickAddLike"><Icon icon="mdi:thumb-up" /></button>
-        <button :class="{ disabled: enableAddLike }" @click="clickAddLike"><Icon icon="mdi:thumb-down" /></button>
+        <button :class="{ disabled: !enableAddLike }" @click="clickAddLike"><Icon icon="mdi:thumb-up" width="24" height="24"/></button>
+        <button :class="{ disabled: enableAddLike }" @click="clickAddLike"><Icon icon="mdi:thumb-down" width="24" height="24"/></button>
         <!-- <button><Icon icon="mdi:check" /></button> -->
         <!-- <button :class="{ disabled: !enableAddLike }" @click="clickAddLike"><Icon icon="mdi:plus-thick" /></button> -->
       </div>
