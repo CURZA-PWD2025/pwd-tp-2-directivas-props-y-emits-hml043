@@ -1,10 +1,11 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue';
   import { Icon } from "@iconify/vue";
-  import { defineProps } from 'vue';
+  import { defineProps, defineEmits } from 'vue';  
   import Pelicula from '../interfaces/Pelicula.ts'
 
   const props = defineProps<{pelicula:Pelicula}>()
+  const emit = defineEmits(['onClickAddLike']);
 
   const countLikes = ref(props.pelicula.likes)
   const enableAddLike = ref(true)
@@ -25,6 +26,7 @@
   */
 
   const clickAddLike = computed(() => {
+    emit('onClickAddLike', [ props.pelicula.titulo, enableAddLike.value]);
     if (enableAddLike.value) {
       countLikes.value++
       enableAddLike.value = false
