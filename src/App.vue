@@ -1,10 +1,10 @@
 <script setup lang="ts">
-  import { ref } from 'vue';  
+  import { ref, computed  } from 'vue';  
   import CardComponent from './components/CardComponent.vue'  
   import peliculas from '../resource/movies.ts'
 
-  //const message = ref('No message yet');
-  const pelisVotadas = ref([]);
+  const search = ref("")
+  const pelisVotadas = ref([]);  
 
   const handleButtonClickAddLike = (msg) => {
     //message.value = msg[0];
@@ -21,11 +21,21 @@
     //console.log(message.value)
     //console.log(pelisVotadas)
   };
+
+  const peliculas_ = computed(() => {    
+    if (search.value.length < 3) { return peliculas; }
+    return peliculas.filter(pelicula => pelicula.titulo.toLowerCase().includes(search.value.toLowerCase()));
+  })
 </script>
 
 <template>
   <div>
     <h1>PELICULAS</h1>
+  </div>
+  <div>
+    <p>Buscar (3+ car.): {{ search }}</p>
+    <input v-model="search" placeholder="titulo a buscar" />
+    <hr>
   </div>
   <div>
     <h3>Votadas:</h3>
@@ -35,7 +45,7 @@
   </div>
   <div class="pelis-lista">
     <CardComponent
-      v-for="pelicula in peliculas"
+      v-for="pelicula in peliculas_"
       :key="pelicula.id"
       :pelicula="pelicula"
       @onClickAddLike="handleButtonClickAddLike"
@@ -44,6 +54,9 @@
 </template>
 
 <style scoped>
+  input {
+    font-size: 25px;    
+  }
   .pelis-lista {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
